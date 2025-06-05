@@ -1,28 +1,12 @@
 class Inventory:
     def __init__(self, initial_inventory=None):
-        """
-        Ініціалізує об'єкт інвентарю.
-
-        Args:
-            initial_inventory (dict, optional): Початковий словник інвентарю,
-                де ключі - назви продуктів, а значення - їх кількість.
-                За замовчуванням None (створюється порожній інвентар).
-        """
         if initial_inventory is None:
             self.inventory = {}
         else:
             self.inventory = initial_inventory.copy()
 
     def update_inventory(self, product_name, quantity_change):
-        """
-        Оновлює кількість вказаного продукту в інвентарі.
 
-        Args:
-            product_name (str): Назва продукту для оновлення.
-            quantity_change (int): Зміна кількості.
-                Додатне значення - додавання продуктів.
-                Від'ємне значення - видалення продуктів.
-        """
         if product_name in self.inventory:
             self.inventory[product_name] += quantity_change
             if self.inventory[product_name] < 0:
@@ -36,23 +20,11 @@ class Inventory:
                 print(f"Помилка: Продукт '{product_name}' відсутній на складі, неможливо видалити.")
 
     def get_low_stock_products(self, threshold=5):
-        """
-        Повертає список продуктів, кількість яких на складі менше заданого порогу.
 
-        Args:
-            threshold (int, optional): Мінімальна кількість для вважання продукту
-                таким, що має низький запас. За замовчуванням 5.
-
-        Returns:
-            list: Список назв продуктів з низьким запасом.
-        """
         low_stock = [product for product, quantity in self.inventory.items() if quantity < threshold]
         return low_stock
 
     def display_inventory(self):
-        """
-        Виводить на екран поточний стан інвентарю.
-        """
         print("\nПоточний стан інвентарю:")
         if self.inventory:
             for product, quantity in self.inventory.items():
